@@ -1,0 +1,18 @@
+{
+  "name": "data-builder",
+  "version": "1.0.0",
+  "description": "A little tool for building word lists",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "Adam Powers <apowers@ato.ms>",
+  "license": "MIT",
+  "dependencies": {
+    "@stdlib/datasets-female-first-names-en": "^0.2.2",
+    "@stdlib/datasets-male-first-names-en": "^0.2.2",
+    "all-the-cities": "^3.1.0",
+    "categorized-words": "^1.0.0",
+    "node-fetch": "^2.7.0"
+  }
+}

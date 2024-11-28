@@ -1,0 +1,7 @@
+node_modules
+.pytest_cache
+.mypy_cache
+.venv
+tmp
+*~
+__pycache__
