@@ -8,8 +8,8 @@ import math
 class RandomSource:
     def __init__(self, b: bytes) -> None:
         self.bytes = b
-        # self.ba = deserialize(b)  # .reverse()?
-        self.ba = bitarray(buffer=b)
+        # print("bytes", b)
+        self.ba = bitarray(buffer=b) # .reverse()?
         self.curr_offset = 0
 
     def get_bits(self, num_bits: int) -> int:
@@ -21,9 +21,10 @@ class RandomSource:
         return ba2int(bits)
 
     def get_max(self, max: int) -> int:
-        num_bits = math.ceil(math.log2(max))
-        # print("num_bits", num_bits)
-        return self.get_bits(num_bits) % max
+        num_bits = required_bits(max)
+        res = self.get_bits(num_bits)
+        # print(f"max: {max}; num_bits: {num_bits}, res: {res}")
+        return res % max
 
     @staticmethod
     def from_uuid(u: uuid.UUID | str) -> RandomSource:
@@ -33,3 +34,9 @@ class RandomSource:
 
     # from_hash(alg: str, alg_opts)
     # from_rand(nbytes: int = 16)
+
+def required_bits(n: int) -> int:
+    return math.ceil(math.log2(n))
+
+def required_bytes(bits: int) -> int:
+    return math.ceil(bits / 8)

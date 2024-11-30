@@ -9,10 +9,10 @@ class TestDict:
         r = FlexiDict.get_registry()
         assert "city" in r
         assert r["city"].get_entry(0) == "El Tarter"
-        assert "first-name" in r
-        assert "last-name" in r
-        assert "female-name" in r
-        assert "male-name" in r
+        assert "firstname" in r
+        assert "lastname" in r
+        assert "femalename" in r
+        assert "malename" in r
         assert "noun" in r
         assert "adj" in r
         assert "verb" in r
