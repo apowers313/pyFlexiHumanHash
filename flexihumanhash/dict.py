@@ -9,6 +9,9 @@ class FlexiDict(ABC):
     @abstractmethod
     def get_entry(self, n: int) -> str: ...
 
+    @abstractmethod
+    def preprocess(self, args: tuple[Any, ...], kwargs: dict[str, Any]) -> FlexiDict: ...
+
     @property
     @abstractmethod
     def size(self) -> int: ...
@@ -33,13 +36,17 @@ def register_dict(name: str) -> Callable[[T], T]:
 class FlexiTextDict(FlexiDict):
     def __init__(self, name: str, words: list[str], min: int = 0, max: int = 2048) -> None:
         if min != 0 or max != 2048:
-            self.words = [w for w in words if len(w) > min and len(w) < max]
+            self.words = [w for w in words if len(w) >= min and len(w) <= max]
         else:
             self.words = words
-        self.sz = len(words)
+        self.sz = len(self.words)
+        self.name = name
 
     def get_entry(self, n: int) -> str:
         return self.words[n]
+
+    def preprocess(self, args: tuple[Any, ...], kwargs: dict[str, Any]) -> FlexiTextDict:
+        return FlexiTextDict(self.name, self.words, *args, **kwargs)
 
     @property
     def size(self) -> int:
@@ -60,7 +67,10 @@ class FlexiHexDict(FlexiDict):
         self.sz = size
 
     def get_entry(self, n: int) -> str:
-        return f"{n:0{self.sz}x}" 
+        return f"{n:0{self.sz}x}"
+
+    def preprocess(self, args: tuple[Any, ...], kwargs: dict[str, Any]) -> FlexiHexDict:
+        return FlexiHexDict(*args, **kwargs)
 
     @property
     def size(self) -> int:
@@ -80,6 +90,9 @@ class FlexiDecimalDict(FlexiDict):
     def size(self) -> int:
         ret: int = 10 ** self.sz
         return ret
+
+    def preprocess(self, args: tuple[Any, ...], kwargs: dict[str, Any]) -> FlexiDecimalDict:
+        return FlexiDecimalDict(*args, **kwargs)
 
 FlexiTextDict.from_file("noun", "data/build/noun")
 FlexiTextDict.from_file("adj", "data/build/adjective")
