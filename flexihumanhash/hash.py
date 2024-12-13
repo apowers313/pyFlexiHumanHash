@@ -36,7 +36,7 @@ class FlexiHumanHash:
         if isinstance(data, int):
             sz = required_bytes(required_bits(data))
             sz = sz if sz > 4 else 4
-            data = data.to_bytes(sz)
+            data = data.to_bytes(sz, byteorder="big")
 
         if isinstance(data, str):
             data = data.encode()
