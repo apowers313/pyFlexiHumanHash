@@ -12,9 +12,13 @@ pip install flexi-human-hash
 Use
 ``` python
 from flexihumanhash import FlexiHumanHash
-fhh = FlexiHumanHash("{{adjective}}-{{noun}}")
-print(fhh.hash())
-# Expected output: "betwixt-railways"
+fhh = FlexiHumanHash("{{adj}}-{{noun}}")
+print(fhh.hash("hello world"))
+# Expected output: "crookedest-valentines"
+print(fhh.hash(42))
+# Expected output: "worthiest-omelettes"
+print(fhh.hash(bytes([0, 1, 3, 5])))
+# Expected output: "manila-dive"
 ```
 
 ## Features:
@@ -26,18 +30,18 @@ print(fhh.hash())
 * Jinja2-based templating for more features and control
 
 ## API Examples:
-Simple hash, you provide the random numbers
+Simple hash converted into a string
 ``` python
-fhh = FlexiHumanHash("{{adjective}}-{{adjective}}-{{noun}}-{{decimal(4)}}")
-fhh.hash("Hello world!")
-# Expected output: "disagreeably-thankless-newsgirls-3149"
+fhh = FlexiHumanHash("{{adj}}-{{adj}}-{{noun}}-{{decimal(4)}}")
+str(fhh.hash("hello world."))
+# Expected output: "manuscript-anatomically-naps-5303"
 ```
 
 Another format, random number provided for you
 ``` python
-fhh = FlexiHumanHash("{{adjective}}, {{adjective}} {{noun}} {{hex(4)}}")
-fhh.hash()
-# Expected output: "stalwart, dominant attire f214"
+fhh = FlexiHumanHash("{{adj}}, {{adj}} {{noun}} {{hex(4)}}")
+print(fhh.rand())
+# Expected output: "frolicsome, intelligent mix 89d5"
 ```
 
 Another format, md5 hash a string for random numbers, transform names to all caps
