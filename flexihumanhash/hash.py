@@ -3,10 +3,11 @@ from __future__ import annotations
 from jinja2 import Environment, BaseLoader
 from typing import Any
 import os
+import hashlib
+import math
 
 from .dict import FlexiDict
-from .rand import RandomSource, required_bits, required_bytes
-import hashlib
+from .rand import RandomSource
 
 
 class FlexiHumanHash:
@@ -197,3 +198,11 @@ class JinjaExpr:
         self.kwargs = kwargs
         self.hasher.call_records.append(self)
         self.dict = self.dict.preprocess(args, kwargs)
+
+
+def required_bits(n: int) -> int:
+    return math.ceil(math.log2(n))
+
+
+def required_bytes(bits: int) -> int:
+    return math.ceil(bits / 8)
