@@ -65,7 +65,9 @@ print(f"Entropy: 2^${fhh.entropy_bits}")
 
 Add a dictionary from a file
 ``` python
-FlexiTextDict.from_file("./foo.txt") # one word per line
+from pathlib import Path
+
+FlexiTextDict.from_file(Path("./foo.txt")) # file contains one word per line
 ```
 
 Add a dictionary programmatically
@@ -105,13 +107,13 @@ class FlexiDecimalDict(FlexiDict):
     * {{hex}} = 3fa8
     * {{hex(8)}} = cb28f30d
     * {{hex(1)}} = e
-* female-name
+* femalename
     * 4,951 English capitalized female first names / given names from [@stdlib](https://github.com/stdlib-js/datasets-female-first-names-en)
-* male-name
+* malename
     * 3,898 English capitalized male first names / given names from [@stdlib](https://github.com/stdlib-js/datasets-male-first-names-en)
-* first-name
+* firstname
     * 8,849 English capitalized first names / given names (female-name and male-name combined)
-* last-name
+* lastname
     * 21,985 last names / family names from [uuid-readable](https://github.com/Debdut/uuid-readable)
 * city
     * 138,398 city names from [all-the-cities](https://www.npmjs.com/package/all-the-cities)
