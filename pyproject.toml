@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "flexihumanhash"
-version = "0.9.2"
+version = "0.9.3"
 description = "Makes hashes readable by humans and gives the developer control over how the output looks."
 license = "MIT"
 homepage = "https://github.com/apowers313/pyFlexiHumanHash"
